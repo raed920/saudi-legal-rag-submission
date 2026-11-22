@@ -31,10 +31,32 @@ py -3.12 -m venv .venv
 Copy-Item .env.example .env
 ```
 
-Edit `.env` and set your own `ANTHROPIC_API_KEY`. Then:
+Edit `.env` and set your own `ANTHROPIC_API_KEY`.
+
+### Required: rebuild the database before the first run
+
+After cloning this repository, you must build the Chroma database locally from
+the included `data/legal_articles.json` file. All 946 article texts and their
+classification metadata are already included; you do not need to collect the
+legal data again.
+
+The uploaded `legal_db1/legal_db1/` folder contains partial index files and is
+missing `chroma.sqlite3`, so it cannot be used as a complete database. Use the
+following command to generate a complete database in `legal_db/`, which is the
+default location used by the application:
 
 ```powershell
 .\.venv\Scripts\python.exe data.py
+```
+
+Wait until the command finishes indexing all 946 articles. This is required once
+per fresh clone or machine, and again if the generated database is deleted.
+Keep the generated `legal_db/` folder for subsequent runs. If you set
+`LEGAL_DB_PATH` in `.env`, both the builder and application use that location.
+
+Then run a complaint:
+
+```powershell
 .\.venv\Scripts\python.exe main.py "اشتريت سيارة ووجدت فيها عيباً وأريد فسخ البيع"
 ```
 
