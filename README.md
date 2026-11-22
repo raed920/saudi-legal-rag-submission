@@ -1,4 +1,4 @@
-# Saudi Legal Classification and Retrieval
+ # Saudi Legal Classification and Retrieval
 
 This repository contains the core classification and retrieval implementation
 supporting our published paper, including the legal corpus and instructions for
@@ -81,16 +81,3 @@ Legal advice generation is disabled in this entry point, matching the original
 pipeline. The final article list consists of the top reranked retrieval results
 for each selected law.
 
-## Submission scope
-
-This is the application-only submission. Evaluation experiments, benchmark
-scripts/results, spreadsheets, development tools, caches, logs, API test scripts,
-and the original Git history are excluded. This copy changes configuration and
-the command-line example to make it portable; it keeps the application prompts
-and retrieval logic. Explicit temperature settings are omitted to use provider
-defaults, consistent with the existing retrieval study compatibility notes.
-This submission does not reproduce that separate study.
-
-Validation before submission checked Python syntax, dataset completeness,
-offline pipeline initialization, and database-builder inputs. A full live query
-and a fresh embedding build were not run as part of packaging.
