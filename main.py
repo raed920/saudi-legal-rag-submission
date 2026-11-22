@@ -1470,8 +1470,8 @@ def run_full_pipeline_v2(user_query: str, articles_per_file: int = 5) -> dict:
     print(f"{'='*60}\n")
 
     print("\n[5] توليد الرأي القانوني:")
-    #legal_advice = generate_legal_advice(user_query, top_articles_with_titles)
-    #print(legal_advice)
+    legal_advice = generate_legal_advice(user_query, top_articles_with_titles)
+    print(legal_advice)
 
     # ── Step E: Log ───────────────────────────────────────────────
     log_data = {
@@ -1507,7 +1507,7 @@ def run_full_pipeline_v2(user_query: str, articles_per_file: int = 5) -> dict:
         "madanyh_articles": top_articles,
         "madanyh_articles_with_titles": top_articles_with_titles,
         "retrieval_stats": log_data["retrieval_stats"],
-        #"legal_advice": legal_advice,
+        "legal_advice": legal_advice,
     }
 
 

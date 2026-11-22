@@ -1,22 +1,23 @@
  # Saudi Legal Classification and Retrieval
 
-This repository contains the core classification and retrieval implementation
+This repository contains the core classification, retrieval, and advice-generation implementation
 supporting our published paper, including the legal corpus and instructions for
 rebuilding the database. It is a simplified research reference, rather than the
 complete deployed application. The web interface and evaluation scripts are
-excluded, and legal-advice generation is disabled in the entry point.
+excluded. The command-line entry point generates advice from the retrieved articles.
 
 Graduation project: classify an Arabic legal complaint and retrieve relevant
 articles from the Saudi Civil Transactions Law, Evidence Law, and Commercial
 Courts Law. The pipeline uses Claude for law selection, hierarchical
-classification, hypothetical query generation (HyDE), and article reranking;
+classification, hypothetical query generation (HyDE), article reranking, and
+grounded legal-advice generation;
 multilingual E5 embeddings and Chroma provide semantic retrieval.
 
 ## Required files
 
 | File | Purpose |
 | --- | --- |
-| `main.py` | Classification prompts and retrieval pipeline, with a command-line entry point |
+| `main.py` | Classification, retrieval, and advice-generation pipeline, with a command-line entry point |
 | `data.py` | Build the local vector database |
 | `data/legal_articles.json` | 946 legal articles and their existing classification metadata |
 | `requirements.txt` | Python dependencies |
@@ -71,13 +72,16 @@ the Windows Python path, and `cp .env.example .env`.
 The index builder downloads `intfloat/multilingual-e5-large` on its first run.
 Indexing requires internet access and sufficient memory for that model.
 Running a complaint makes paid Anthropic API calls using
-`claude-haiku-4-5-20251001`. The model must be available to your API account.
+`claude-haiku-4-5-20251001` for classification and retrieval stages, and
+`claude-sonnet-4-5` for advice generation. Both models must be available to your
+API account.
 `LEGAL_DB_PATH` optionally selects a different index directory; both scripts
 use the same setting. The index can be rebuilt from the included JSON.
 
-The program prints retrieved articles and returns pipeline details through
-`run_full_pipeline_v2(query)`. Each run writes a local log under `logs/`.
-Legal advice generation is disabled in this entry point, matching the original
-pipeline. The final article list consists of the top reranked retrieval results
-for each selected law.
+The program prints retrieved articles followed by generated Arabic legal advice.
+`run_full_pipeline_v2(query)` returns pipeline details and the advice text in
+`legal_advice`. The advice prompt uses the top reranked articles for each selected
+law and instructs the model to base its response only on those provisions.
+If no articles are retrieved, the generator returns a no-results message without
+calling the advice model. Each run writes a local log under `logs/`.
 
