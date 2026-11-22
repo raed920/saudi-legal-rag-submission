@@ -1,5 +1,11 @@
 # Saudi Legal Classification and Retrieval
 
+This repository contains the core classification and retrieval implementation
+supporting our published paper, including the legal corpus and instructions for
+rebuilding the database. It is a simplified research reference, rather than the
+complete deployed application. The web interface and evaluation scripts are
+excluded, and legal-advice generation is disabled in the entry point.
+
 Graduation project: classify an Arabic legal complaint and retrieve relevant
 articles from the Saudi Civil Transactions Law, Evidence Law, and Commercial
 Courts Law. The pipeline uses Claude for law selection, hierarchical
