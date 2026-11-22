@@ -40,10 +40,9 @@ the included `data/legal_articles.json` file. All 946 article texts and their
 classification metadata are already included; you do not need to collect the
 legal data again.
 
-The uploaded `legal_db1/legal_db1/` folder contains partial index files and is
-missing `chroma.sqlite3`, so it cannot be used as a complete database. Use the
-following command to generate a complete database in `legal_db/`, which is the
-default location used by the application:
+The generated Chroma database is not included in this repository. Use the
+following command to build it in `legal_db/`, which is the default location
+used by the application:
 
 ```powershell
 .\.venv\Scripts\python.exe data.py

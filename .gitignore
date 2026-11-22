@@ -5,4 +5,5 @@
 __pycache__/
 *.py[cod]
 legal_db/
+legal_db1/
 logs/
